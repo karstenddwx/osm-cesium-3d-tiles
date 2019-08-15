@@ -3,6 +3,7 @@
 
 import sys
 import json
+import math
 from os import listdir
 from os.path import isfile, join, basename
 
@@ -27,7 +28,7 @@ def main(dir_path):
         region = tileset_json['root']['boundingVolume']['region']
 
         # Skip empty regions
-        if region[4] != 0.0 or region[5] != 0.0:
+        if (not math.isnan(region[4]) and region[4] != 0.0) or (not math.isnan(region[5]) and region[5] != 0.0):
             # Update root region
             if len(root_region) == 0:
                 root_region = region
